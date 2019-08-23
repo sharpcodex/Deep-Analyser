@@ -75,13 +75,13 @@ def build_model():
     ])
 
     parameters = {
-        'tfidf__smooth_idf': [True, False],
-        'clf__estimator__n_estimators': [50, 500],
-        'clf__estimator__max_features': ['auto', 'sqrt', 'log2'],
-        'clf__estimator__max_depth': [4, 5, 6, 7, 8],
-        'clf__estimator__min_samples_split': [2, 3, 4, 5],
-        'clf__estimator__min_samples_leaf': [2, 5, 10, 20],
-        'clf__estimator__criterion': ['gini', 'entropy']
+        # 'tfidf__smooth_idf': [True, False],
+        # 'clf__estimator__n_estimators': [50, 500],
+        # 'clf__estimator__max_features': ['auto', 'sqrt', 'log2'],
+        # 'clf__estimator__max_depth': [4, 5, 6, 7, 8],
+        # 'clf__estimator__min_samples_split': [2, 3, 4, 5],
+        # 'clf__estimator__min_samples_leaf': [2, 5, 10, 20],
+        # 'clf__estimator__criterion': ['gini', 'entropy']
     }
 
     return GridSearchCV(pipeline, param_grid=parameters, verbose=10)
