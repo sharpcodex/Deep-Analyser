@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Disaster Response Dashboard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Disaster Response</a>
+            </div>
+        </div><!--/.container-fluid -->
+    </nav>
+    <div class="jumbotron">
+        <h1 class="text-center">Disaster Response Dashboard</h1>
+        <p class="text-center">Analyzing message data for disaster response</p>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-12">
+                <form action="/go" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter a message to classify" name="query">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Classify Message</button>
+                    </span>
+                    </div><!-- /input-group -->
+                </form>
+            </div><!-- /.col-lg-6 -->
+        </div>
+    </div>
+    {% block content %}
+        <div class="panel panel-default">
+            <div class="panel-heading">Distribution of Message</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="graph-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Top and Less 5</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="graph-1"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="graph-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Heatmaps</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="graph-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <script type="text/javascript">
+        let graphs = {{graphJSON | safe}};
+        let ids = {{ids | safe}};
+        for (let i in graphs) {
+            Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
+        }
+    </script>
+
+</div>
+</body>
+</html>

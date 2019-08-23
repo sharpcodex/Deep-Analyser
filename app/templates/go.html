@@ -1,0 +1,29 @@
+{% extends "master.html" %}
+{% block title %}Results{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ query }}</div>
+        <div class="panel-body">
+            <table class="table table-bordered table-bordered table-hover">
+                <tbody>
+                <tr>
+                    {% for category, classification in classification_result.items() %}
+                        {% if loop.index % 6 == 1 %}
+                            <tr>
+                        {% endif %}
+                    {% if classification == 1 %}
+                        <td class="danger">{{ category.replace('_', ' ').title() }}</td>
+                    {% else %}
+                        <td class="active">{{ category.replace('_', ' ').title() }}</td>
+                    {% endif %}
+                    {% if loop.index % 6 == 0 %}
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
