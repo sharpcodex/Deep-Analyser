@@ -1,5 +1,3 @@
-# Disaster Response Pipeline Project
-
 ### Table of Contents
 
 1. [Summary ](#summary )
